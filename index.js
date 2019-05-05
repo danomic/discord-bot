@@ -16,7 +16,7 @@ bot.on('message', message => {
     let args = message.content.substring(PREFIX.length + command.length).split(" -");
 
     if(message.content[0] === PREFIX) {
-        switch (command) {
+        switch (command[0]) {
             case 'inventory':
             case 'i':
                 show(message.member.toString());
