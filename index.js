@@ -28,7 +28,7 @@ bot.on('message', message => {
                     addItem(message.member.toString(), itemAdd);
                     message.channel.sendMessage("```"+itemAdd + " was added to your inventory"+"```");
                 } else {
-                    message.channel.sendMessage("nothing to add: 'add <item>'");
+                    message.channel.sendMessage("```"+"nothing to add: 'add <item>'"+"```");
                 }
 
                 break;
@@ -36,9 +36,9 @@ bot.on('message', message => {
             case 'r':
                 let itemRemove = args[1];
                 if (itemRemove != null) {
-                    message.channel.sendMessage(removeItem(message.member.toString(), itemRemove));
+                    message.channel.sendMessage("```"+removeItem(message.member.toString(), itemRemove)+"```");
                 } else {
-                    message.channel.sendMessage("nothing to remove: 'remove <item>'");
+                    message.channel.sendMessage("```"+"nothing to remove: 'remove <item>'"+"```");
                 }
                 break;
             case 'clear':
@@ -60,12 +60,12 @@ bot.on('message', message => {
                 for( let i = 0; i < users.users.length; i++){
                     if (users.users[i].id === user) {
                         found = true;
-                        message.channel.sendMessage("inventory already exists");
+                        message.channel.sendMessage("```"+"inventory already exists"+"```");
                     }
                 }
                 if(!found){
                     users.users.push({id: user, inventory:[]});
-                    message.channel.sendMessage("created inventory");
+                    message.channel.sendMessage("```"+"created inventory"+"```");
                 }
 
                 fs.writeFile("botUsers.json", JSON.stringify(users, null, 4), err => {
@@ -111,7 +111,7 @@ bot.on('message', message => {
                         }
                     }
                 }
-                message.channel.sendMessage(msg);
+                message.channel.sendMessage("```"+msg+"```");
 
                 fs.writeFile("botUsers.json", JSON.stringify(users, null, 4), err => {
                     if(err) throw err;
@@ -135,9 +135,9 @@ bot.on('message', message => {
                             items += inventar[i] + '\n';
                         }
                         if(items.length > 0){
-                            message.channel.sendMessage(items);
+                            message.channel.sendMessage("```"+items+"```");
                         }else{
-                            message.channel.sendMessage("your inventory is empty");
+                            message.channel.sendMessage("```"+"your inventory is empty"+"```");
                         }
                     }
                 }
@@ -154,7 +154,7 @@ bot.on('message', message => {
                 for( let i = 0; i < users.users.length; i++){
                     if (users.users[i].id === user) {
                         users.users[i].inventory = [];
-                        message.channel.sendMessage("inventory cleared");
+                        message.channel.sendMessage("```"+"inventory cleared"+"```");
                     }
                 }
 
