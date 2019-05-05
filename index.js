@@ -4,7 +4,7 @@ const bot = new Discord.Client();
 
 const token = 'NTc0Mjc0NTc0MzM0Njg5Mjgw.XM6mew.IK7lxDqsyuM-dzRMJRZoHjQcOic';
 
-const PREFIX = '.';
+const PREFIX = '=';
 
 bot.on('ready', () =>{
     console.log('This bot is online!');
