@@ -132,7 +132,7 @@ bot.on('message', message => {
                         let items = "";
 
                         for (let i = 0; i < inventar.length; i++) {
-                            items += inventar[i] + '\n';
+                            items += '\n' + inventar[i];
                         }
                         if(items.length > 0){
                             message.channel.sendMessage("```"+items+"```");
