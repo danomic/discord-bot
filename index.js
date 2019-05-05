@@ -12,17 +12,18 @@ bot.on('ready', () =>{
 
 bot.on('message', message => {
 
-    let args = message.content.substring(PREFIX.length).split(" ");
+    let command = message.content.substring(PREFIX.length).split(" ", 1);
+    let args = message.content.substring(PREFIX.length + command.length).split(" -");
 
     if(message.content[0] === PREFIX) {
-        switch (args[0]) {
+        switch (command) {
             case 'inventory':
             case 'i':
                 show(message.member.toString());
                 break;
             case 'add':
             case 'a':
-                let itemAdd = args[1];
+                let itemAdd = args[0];
 
                 if (itemAdd != null) {
                     addItem(message.member.toString(), itemAdd);
@@ -34,7 +35,7 @@ bot.on('message', message => {
                 break;
             case 'remove':
             case 'r':
-                let itemRemove = args[1];
+                let itemRemove = args[0];
                 if (itemRemove != null) {
                     message.channel.sendMessage(removeItem(message.member.toString(), itemRemove));
                 } else {
