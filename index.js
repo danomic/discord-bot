@@ -26,7 +26,7 @@ bot.on('message', message => {
 
                 if (itemAdd != null) {
                     addItem(message.member.toString(), itemAdd);
-                    message.channel.sendMessage(itemAdd + " was added to your inventory");
+                    message.channel.sendMessage("```"+itemAdd + " was added to your inventory"+"```");
                 } else {
                     message.channel.sendMessage("nothing to add: 'add <item>'");
                 }
