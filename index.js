@@ -36,7 +36,7 @@ bot.on('message', message => {
             case 'r':
                 let itemRemove = args[1];
                 if (itemRemove != null) {
-                    message.channel.sendMessage("```"+removeItem(message.member.toString(), itemRemove)+"```");
+                    message.channel.sendMessage(removeItem(message.member.toString(), itemRemove));
                 } else {
                     message.channel.sendMessage("```"+"nothing to remove: 'remove <item>'"+"```");
                 }
