@@ -169,7 +169,9 @@ bot.on('message', message => {
             ADMIN = admin;
             message.channel.sendMessage("```"+"setAdmin was triggert"+"```");
         }
-        return ADMIN;
+        setTimeout(function(){
+            return ADMIN;
+        }, 2000);
     }
     
     function showUser(user){
