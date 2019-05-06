@@ -11,7 +11,7 @@ bot.on('ready', () =>{
 bot.on('message', message => {
 
     let command = message.content.substring(PREFIX.length).split(" ", 1);
-    let args = message.content.substring(PREFIX.length + command.length + 1).split(" -");
+    let args = message.content.substring(PREFIX.length + command[0].length + 1).split(" -");
 
     if(message.content[0] === PREFIX) {
         switch (command[0]) {
@@ -53,7 +53,7 @@ bot.on('message', message => {
                 break;
             case 'admin':
                 let nickname = args[0];
-                message.channel.sendMessage("```"+"nickname = "+nickname+"```");
+                
                 if(nickname != null && nickname.length > 0){
                     if(!isAdmin(message.member.toString())){
                         message.channel.sendMessage("```"+"you don't have access to this command"+"```");
