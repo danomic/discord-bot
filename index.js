@@ -72,11 +72,27 @@ bot.on('message', message => {
                     if(!isAdmin(message.member.id)){
                         message.channel.sendMessage("```"+"you don't have access to this command"+"```");
                     } else {
-                        sendMessage(nicknameM, messageN);
+                        if(nicknameM[0]='#'){
+                            id = nicknameM.substring(1);
+                            bot.users.get(id).send("```"+message+"```");
+                        }else{
+                            sendMessage(nicknameM, messageN);
+                        }
                     }
                 } else {
                     message.channel.sendMessage("```"+"no user provided: 'send <user> -<message>'"+"```");
                 }
+                break;
+            case 'users':
+                if(!isAdmin(message.member.id)){
+                        message.channel.sendMessage("```"+"you don't have access to this command"+"```");
+                    } else {
+                        let allUsers = ""; 
+                        for (u of bot.users){
+                        allUsers += '\n' + u[1].username + " : " + u[1].id;
+                        }
+                        message.channel.sendMessage("```"+allUsers+"```");
+                    }
                 break;
         }
     }
