@@ -41,10 +41,6 @@ bot.on('message', message => {
                 }
                 break;
             case 'clear':
-                let user = args[0];
-                if(user != null){
-                    bot.users.get(user).send("someMessage");
-                }
                 clearInventory(message.member.toString());
                 break;
             case 'create':
