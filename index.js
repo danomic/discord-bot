@@ -12,14 +12,15 @@ bot.on('message', message => {
 
     let command = message.content.substring(PREFIX.length).split(" ", 1);
     let args = message.content.substring(PREFIX.length + command.length + 1).split(" -");
-    var ADMIN = false;
+    let ADMIN = false;
+    
+    isAdmin(message.member.toString());
 
     if(message.content[0] === PREFIX) {
         switch (command[0]) {
             case 'inventory':
             case 'i':
                 let user = args[0];
-                isAdmin(message.member.toString())
                 if(user != null && user.length > 0 && ADMIN){
                     showUser(user);
                 } else {
@@ -167,7 +168,7 @@ bot.on('message', message => {
                 }
             }});
         function setAdmin(admin){
-        ADMIN = admin;
+            ADMIN = admin;
             message.channel.sendMessage("```"+"setAdmin was triggert"+"```");
         }
     }
