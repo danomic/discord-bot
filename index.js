@@ -17,7 +17,7 @@ bot.on('message', message => {
         switch (command[0]) {
             case 'inventory':
             case 'i':
-                let user = args[0];
+                let user = args[0].substring(1);
                 if(user != null){
                     showUser(user);
                 } else {
@@ -26,7 +26,7 @@ bot.on('message', message => {
                 break;
             case 'add':
             case 'a':
-                let itemAdd = args[0];
+                let itemAdd = args[0].substring(1);
 
                 if (itemAdd != null) {
                     addItem(message.member.toString(), itemAdd);
@@ -38,7 +38,7 @@ bot.on('message', message => {
                 break;
             case 'remove':
             case 'r':
-                let itemRemove = args[0];
+                let itemRemove = args[0].substring(1);
                 if (itemRemove != null) {
                     message.channel.sendMessage(removeItem(message.member.toString(), itemRemove));
                 } else {
