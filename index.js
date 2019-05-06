@@ -53,7 +53,7 @@ bot.on('message', message => {
                 break;
             case 'admin':
                 let nickname = args[0];
-                
+                message.channel.sendMessage("```"+"nickname = "+nickname+"```");
                 if(nickname != null && nickname.length > 0){
                     if(!isAdmin(message.member.toString())){
                         message.channel.sendMessage("```"+"you don't have access to this command"+"```");
