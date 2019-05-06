@@ -18,10 +18,10 @@ bot.on('message', message => {
             case 'inventory':
             case 'i':
                 let user = args[0];
-                if(user != null && user.length > 0 && isAdmin(message.member.toString())){
+                if(user != null && user.length > 0 && isAdmin(message.member.id)){
                     showUser(user);
                 } else {
-                    show(message.member.toString());
+                    show(message.member.id);
                 }            
                 break;
             case 'add':
@@ -29,7 +29,7 @@ bot.on('message', message => {
                 let itemAdd = args[0];
 
                 if (itemAdd != null && itemAdd.length > 0) {
-                    addItem(message.member.toString(), itemAdd);
+                    addItem(message.member.id, itemAdd);
                     message.channel.sendMessage("```"+itemAdd + " was added to your inventory"+"```");
                 } else {
                     message.channel.sendMessage("```"+"nothing to add: 'add <item>'"+"```");
@@ -40,13 +40,13 @@ bot.on('message', message => {
             case 'r':
                 let itemRemove = args[0];
                 if (itemRemove != null && itemRemove.length > 0) {
-                    message.channel.sendMessage(removeItem(message.member.toString(), itemRemove));
+                    message.channel.sendMessage(removeItem(message.member.id, itemRemove));
                 } else {
                     message.channel.sendMessage("```"+"nothing to remove: 'remove <item>'"+"```");
                 }
                 break;
             case 'clear':
-                clearInventory(message.member.toString());
+                clearInventory(message.member.id);
                 break;
             case 'create':
                 create(message.member.id, message.member.displayName);
@@ -55,7 +55,7 @@ bot.on('message', message => {
                 let nickname = args[0];
                 
                 if(nickname != null && nickname.length > 0){
-                    if(!isAdmin(message.member.toString())){
+                    if(!isAdmin(message.member.id)){
                         message.channel.sendMessage("```"+"you don't have access to this command"+"```");
                     } else {
                         setAdmin(nickname);
