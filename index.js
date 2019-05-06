@@ -18,8 +18,8 @@ bot.on('message', message => {
             case 'inventory':
             case 'i':
                 let user = args[0];
-                if(user != null && user[0] === '#'){
-                    showUser(user.substring(1));
+                if(user != null){
+                    showUser(user);
                 } else {
                     show(message.member.toString());
                 }            
