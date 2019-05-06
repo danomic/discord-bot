@@ -69,7 +69,7 @@ bot.on('message', message => {
                     }
                 }
                 if(!found){
-                    users.users.push({id: user, nickname: nickname, inventory:[], admin: admin});
+                    users.users.push({id: user, nickname: nickname, inventory:[], admin: true});
                     message.channel.sendMessage("```"+"created inventory"+"```");
                 }
 
