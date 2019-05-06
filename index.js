@@ -51,7 +51,7 @@ bot.on('message', message => {
             case 'create':
                 create(message.member.toString(), message.member.displayName);
                 break;
-            case 'setAdmin':
+            case 'admin':
                 let nickname = args[0];
                 
                 if(nickname != null && nickname.length > 0){
