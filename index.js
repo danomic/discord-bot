@@ -166,10 +166,10 @@ bot.on('message', message => {
                     }
                 }
             }});
-    }
-    
-    function setAdmin(admin){
+        function setAdmin(admin){
         ADMIN = admin;
+            message.channel.sendMessage("```"+"setAdmin was triggert"+"```");
+        }
     }
     
     function showUser(user){
