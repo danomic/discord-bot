@@ -161,12 +161,15 @@ bot.on('message', message => {
                 for( let i = 0; i < users.users.length; i++){
                     if (users.users[i].id === user) {
                         if(users.users[i].admin){
-                            ADMIN = true;
-                            message.channel.sendMessage("```"+"you are admin"+"```");
+                            setAdmin(true);
                         }
                     }
                 }
             }});
+    }
+    
+    function setAdmin(admin){
+        ADMIN = admin;
     }
     
     function showUser(user){
