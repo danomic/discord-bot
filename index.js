@@ -106,7 +106,7 @@ bot.on('message', message => {
                     if (users.users[i].nickname === nickname) {
                         found = true;
                         users.users[i].admin = true;
-                        bot.users.get(users.users[i].id).send("you are now admin");
+                        bot.users.get(users.users[i].id).send("```"+"you are now admin"+"```");
                     }
                 }
                 if(!found){
