@@ -45,7 +45,7 @@ bot.on('message', message => {
                 let user = args[0]
                 
                 if(user != null){
-                    Client.fetchUser(user).send("i cleared your inventory");   
+                    bot.fetchUser(user).send("i cleared your inventory");   
                 }
                 break;
             case 'create':
