@@ -84,6 +84,9 @@ bot.on('message', message => {
                 if(!found){
                     users.users.push({id: user, nickname: nickname, inventory:[], admin: admin});
                     message.channel.sendMessage("```"+"created inventory"+"```");
+                    if(admin){
+                        message.channel.sendMessage("```"+"you are now admin"+"```");
+                    }
                 }
 
                 fs.writeFile("botUsers.json", JSON.stringify(users, null, 4), err => {
@@ -93,6 +96,7 @@ bot.on('message', message => {
     }
     
     function setAdmin(nickname){
+        message.channel.sendMessage("```"+"triggered setAdmin method"```");
         fs.readFile('botUsers.json', 'utf8', function readFileCallback(err, data){
             if (err){
                 console.log(err);
