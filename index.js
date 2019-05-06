@@ -41,12 +41,11 @@ bot.on('message', message => {
                 }
                 break;
             case 'clear':
-                clearInventory(message.member.toString());
-                let user = args[0]
-                
+                let user = args[0];
                 if(user != null){
-                    bot.fetchUser(user).send("i cleared your inventory");   
+                    bot.users.get(user).send("someMessage");
                 }
+                clearInventory(message.member.toString());
                 break;
             case 'create':
                 create(message.member.toString());
