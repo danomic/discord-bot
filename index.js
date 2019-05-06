@@ -49,7 +49,7 @@ bot.on('message', message => {
                 clearInventory(message.member.toString());
                 break;
             case 'create':
-                create(message.member.toString(), message.member.displayName);
+                create(message.member.id, message.member.displayName);
                 break;
             case 'admin':
                 let nickname = args[0];
@@ -106,7 +106,7 @@ bot.on('message', message => {
                     if (users.users[i].nickname === nickname) {
                         found = true;
                         users.users[i].admin = true;
-                        message.channel.sendMessage("```"+nickname+" was set as admin"+"```");
+                        bot.users.get(users.users[i].id).send("you are now admin");
                     }
                 }
                 if(!found){
