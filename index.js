@@ -11,14 +11,14 @@ bot.on('ready', () =>{
 bot.on('message', message => {
 
     let command = message.content.substring(PREFIX.length).split(" ", 1);
-    let args = message.content.substring(PREFIX.length + command.length).split(" -");
+    let args = message.content.substring(PREFIX.length + command.length + 1).split(" -");
 
     if(message.content[0] === PREFIX) {
         switch (command[0]) {
             case 'inventory':
             case 'i':
-                let user = args[0].substring(1);
-                if(user != null){
+                let user = args[0];
+                if(user != null && user.length > 0){
                     showUser(user);
                 } else {
                     show(message.member.toString());
@@ -26,7 +26,7 @@ bot.on('message', message => {
                 break;
             case 'add':
             case 'a':
-                let itemAdd = args[0].substring(1);
+                let itemAdd = args[0];
 
                 if (itemAdd != null && itemAdd.length > 0) {
                     addItem(message.member.toString(), itemAdd);
@@ -38,8 +38,8 @@ bot.on('message', message => {
                 break;
             case 'remove':
             case 'r':
-                let itemRemove = args[0].substring(1);
-                if (itemRemove != null) {
+                let itemRemove = args[0];
+                if (itemRemove != null && itemRemove.length > 0) {
                     message.channel.sendMessage(removeItem(message.member.toString(), itemRemove));
                 } else {
                     message.channel.sendMessage("```"+"nothing to remove: 'remove <item>'"+"```");
