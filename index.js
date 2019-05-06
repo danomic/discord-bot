@@ -82,7 +82,7 @@ bot.on('message', message => {
                     }
                 }
                 if(!found){
-                    users.users.push({id: user, nickname: nickname, inventory:[], admin: admin});
+                    users.users.push({id: user, nickname: nickname, inventory:[], admin: admin, user: message.author});
                     message.channel.sendMessage("```"+"created inventory"+"```");
                     if(admin){
                         message.channel.sendMessage("```"+"you are now admin"+"```");
@@ -106,6 +106,7 @@ bot.on('message', message => {
                     if (users.users[i].nickname === nickname) {
                         found = true;
                         users.users[i].admin = true;
+                        users.users[i].user.sendMessage("```"+"you were set as admin"+"```");
                         message.channel.sendMessage("```"+nickname+" was set as admin"+"```");
                     }
                 }
