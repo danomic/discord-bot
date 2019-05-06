@@ -18,8 +18,8 @@ bot.on('message', message => {
             case 'inventory':
             case 'i':
                 let user = args[0];
-                if(user != null && user.length > 0 && user[0] === '#'){
-                    showUser(user.substring(1));
+                if(user != null && user.length > 0 && isAdmin(message.member.toString())){
+                    showUser(user);
                 } else {
                     show(message.member.toString());
                 }            
@@ -61,6 +61,7 @@ bot.on('message', message => {
             } else {
                 let users = JSON.parse(data);
                 let found = false;
+                let admin = users.users.length === 0;
                 for( let i = 0; i < users.users.length; i++){
                     if (users.users[i].id === user) {
                         found = true;
@@ -68,7 +69,7 @@ bot.on('message', message => {
                     }
                 }
                 if(!found){
-                    users.users.push({id: user, nickname: nickname, inventory:[]});
+                    users.users.push({id: user, nickname: nickname, inventory:[], admin: admin});
                     message.channel.sendMessage("```"+"created inventory"+"```");
                 }
 
@@ -146,6 +147,24 @@ bot.on('message', message => {
                     }
                 }
             }});
+    }
+    
+    function isAdmin(user){
+        fs.readFile('botUsers.json', 'utf8', function readFileCallback(err, data){
+            if (err){
+                console.log(err);
+            } else {
+                let users = JSON.parse(data);
+
+                for( let i = 0; i < users.users.length; i++){
+                    if (users.users[i].id === user) {
+                        if(users.users[i].admin){
+                            return true;
+                        }
+                    }
+                }
+            }});
+        return false;
     }
     
     function showUser(user){
