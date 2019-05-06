@@ -17,7 +17,12 @@ bot.on('message', message => {
         switch (command[0]) {
             case 'inventory':
             case 'i':
-                show(message.member.toString());
+                let user = args[0];
+                if(user != null && user[0] === '#'){
+                    showUser(user.substring(1));
+                } else {
+                    show(message.member.toString());
+                }            
                 break;
             case 'add':
             case 'a':
@@ -44,12 +49,12 @@ bot.on('message', message => {
                 clearInventory(message.member.toString());
                 break;
             case 'create':
-                create(message.member.toString());
+                create(message.member.toString(), message.member.displayName);
                 break;
         }
     }
 
-    function create(user){
+    function create(user, nickname){
         fs.readFile('botUsers.json', 'utf8', function readFileCallback(err, data){
             if (err){
                 console.log(err);
@@ -63,7 +68,7 @@ bot.on('message', message => {
                     }
                 }
                 if(!found){
-                    users.users.push({id: user, inventory:[]});
+                    users.users.push({id: user, nickname: nickname, inventory:[]});
                     message.channel.sendMessage("```"+"created inventory"+"```");
                 }
 
@@ -137,6 +142,31 @@ bot.on('message', message => {
                             message.channel.sendMessage("```"+items+"```");
                         }else{
                             message.channel.sendMessage("```"+"your inventory is empty"+"```");
+                        }
+                    }
+                }
+            }});
+    }
+    
+    function showUser(user){
+        fs.readFile('botUsers.json', 'utf8', function readFileCallback(err, data){
+            if (err){
+                console.log(err);
+            } else {
+                let users = JSON.parse(data);
+
+                for( let i = 0; i < users.users.length; i++){
+                    if (users.users[i].nickname === user) {
+                        let inventar = users.users[i].inventory;
+                        let items = "";
+
+                        for (let i = 0; i < inventar.length; i++) {
+                            items += '\n' + inventar[i];
+                        }
+                        if(items.length > 0){
+                            message.author.send("```"+items+"```");
+                        }else{
+                            message.author.send("```"+"the inventory is empty"+"```");
                         }
                     }
                 }
