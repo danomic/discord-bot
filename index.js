@@ -12,7 +12,6 @@ bot.on('message', message => {
 
     let command = message.content.substring(PREFIX.length).split(" ", 1);
     let args = message.content.substring(PREFIX.length + command.length + 1).split(" -");
-    let ADMIN = false;
 
     if(message.content[0] === PREFIX) {
         switch (command[0]) {
@@ -151,27 +150,17 @@ bot.on('message', message => {
     }
     
     function isAdmin(user){
-        fs.readFile('botUsers.json', 'utf8', function readFileCallback(err, data){
-            if (err){
-                console.log(err);
-            } else {
-                let users = JSON.parse(data);
+        let rawdata = fs.readFileSync('botUsers.json'); 
+        let users = JSON.parse(rawdata); 
 
-                for( let i = 0; i < users.users.length; i++){
-                    if (users.users[i].id === user) {
-                        if(users.users[i].admin){
-                            setAdmin(true);
-                        }
-                    }
+        for( let i = 0; i < users.users.length; i++){
+            if (users.users[i].id === user) {
+                if(users.users[i].admin){
+                    return true;
                 }
-            }});
-        function setAdmin(admin){
-            ADMIN = admin;
-            message.channel.sendMessage("```"+"setAdmin was triggert"+"```");
-        }
-        setTimeout(function(){
-            return ADMIN;
-        }, 2000);
+             }
+         }
+        return false;
     }
     
     function showUser(user){
