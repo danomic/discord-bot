@@ -51,6 +51,18 @@ bot.on('message', message => {
             case 'create':
                 create(message.member.toString(), message.member.displayName);
                 break;
+            case 'setAdmin':
+                let user = args[0];
+                
+                if(user != null && user.length > 0){
+                    if(!isAdmin(message.member.toString())){
+                        message.channel.sendMessage("```"+"you don't have access to this command"+"```");
+                    } else {
+                        setAdmin(user);
+                    }
+                } else {
+                    message.channel.sendMessage("```"+"no user provided: 'setAdmin <user>'"+"```");
+                }
         }
     }
 
@@ -71,6 +83,30 @@ bot.on('message', message => {
                 if(!found){
                     users.users.push({id: user, nickname: nickname, inventory:[], admin: admin});
                     message.channel.sendMessage("```"+"created inventory"+"```");
+                }
+
+                fs.writeFile("botUsers.json", JSON.stringify(users, null, 4), err => {
+                    if(err) throw err;
+                });
+            }});
+    }
+    
+    function setAdmin(nickname){
+        fs.readFile('botUsers.json', 'utf8', function readFileCallback(err, data){
+            if (err){
+                console.log(err);
+            } else {
+                let users = JSON.parse(data);
+                let found = false;
+                for( let i = 0; i < users.users.length; i++){
+                    if (users.users[i].nickname === nickname) {
+                        found = true;
+                        users.users[i].admin = true;
+                        message.channel.sendMessage("```"+nickname+" was set as admin"+"```");
+                    }
+                }
+                if(!found){
+                    message.channel.sendMessage("```"+"could not find user "+nickname+"```");
                 }
 
                 fs.writeFile("botUsers.json", JSON.stringify(users, null, 4), err => {
