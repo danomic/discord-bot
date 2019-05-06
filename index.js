@@ -157,7 +157,7 @@ bot.on('message', message => {
 
                 for( let i = 0; i < users.users.length; i++){
                     if (users.users[i].nickname === user) {
-                        message.channel.send("```"+"found "+user+"```");
+                        message.channel.sendMessage("```"+"found "+user+"```");
                         let inventar = users.users[i].inventory;
                         let items = "";
 
