@@ -12,13 +12,15 @@ bot.on('message', message => {
 
     let command = message.content.substring(PREFIX.length).split(" ", 1);
     let args = message.content.substring(PREFIX.length + command.length + 1).split(" -");
+    var ADMIN = false;
 
     if(message.content[0] === PREFIX) {
         switch (command[0]) {
             case 'inventory':
             case 'i':
                 let user = args[0];
-                if(user != null && user.length > 0 && isAdmin(message.member.toString())){
+                isAdmin(message.member.toString())
+                if(user != null && user.length > 0 && ADMIN){
                     showUser(user);
                 } else {
                     show(message.member.toString());
@@ -159,12 +161,12 @@ bot.on('message', message => {
                 for( let i = 0; i < users.users.length; i++){
                     if (users.users[i].id === user) {
                         if(users.users[i].admin){
-                            return true;
+                            ADMIN = true;
+                            message.channel.sendMessage("```"+"you are admin"+"```");
                         }
                     }
                 }
             }});
-        return true;
     }
     
     function showUser(user){
