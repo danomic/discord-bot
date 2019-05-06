@@ -42,6 +42,7 @@ bot.on('message', message => {
                 break;
             case 'clear':
                 clearInventory(message.member.toString());
+                message.author.send("i cleared your inventory");
                 break;
             case 'create':
                 create(message.member.toString());
