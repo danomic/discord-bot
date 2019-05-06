@@ -13,15 +13,13 @@ bot.on('message', message => {
     let command = message.content.substring(PREFIX.length).split(" ", 1);
     let args = message.content.substring(PREFIX.length + command.length + 1).split(" -");
     let ADMIN = false;
-    
-    isAdmin(message.member.toString());
 
     if(message.content[0] === PREFIX) {
         switch (command[0]) {
             case 'inventory':
             case 'i':
                 let user = args[0];
-                if(user != null && user.length > 0 && ADMIN){
+                if(user != null && user.length > 0 && isAdmin(message.member.toString())){
                     showUser(user);
                 } else {
                     show(message.member.toString());
@@ -171,6 +169,7 @@ bot.on('message', message => {
             ADMIN = admin;
             message.channel.sendMessage("```"+"setAdmin was triggert"+"```");
         }
+        return ADMIN;
     }
     
     function showUser(user){
