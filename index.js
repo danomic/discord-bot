@@ -64,6 +64,20 @@ bot.on('message', message => {
                     message.channel.sendMessage("```"+"no user provided: 'setAdmin <user>'"+"```");
                 }
                 break;
+            case 'send':
+                let nicknameM = args[0];
+                let messageN = args[1]
+
+                if(nicknameM != null && nicknameM.length > 0){
+                    if(!isAdmin(message.member.id)){
+                        message.channel.sendMessage("```"+"you don't have access to this command"+"```");
+                    } else {
+                        sendMessage(nicknameM, messageN);
+                    }
+                } else {
+                    message.channel.sendMessage("```"+"no user provided: 'send <user> -<message>'"+"```");
+                }
+                break;
         }
     }
 
@@ -87,6 +101,29 @@ bot.on('message', message => {
                     if(admin){
                         message.channel.sendMessage("```"+"you are now admin"+"```");
                     }
+                }
+
+                fs.writeFile("botUsers.json", JSON.stringify(users, null, 4), err => {
+                    if(err) throw err;
+                });
+            }});
+    }
+    
+    function sendMessage(nickname, message){
+        fs.readFile('botUsers.json', 'utf8', function readFileCallback(err, data){
+            if (err){
+                console.log(err);
+            } else {
+                let users = JSON.parse(data);
+                let found = false;
+                for( let i = 0; i < users.users.length; i++){
+                    if (users.users[i].nickname === nickname) {
+                        found = true;
+                        bot.users.get(users.users[i].id).send("```"+message+"```");
+                    }
+                }
+                if(!found){
+                    message.channel.sendMessage("```"+"could not find user "+nickname+"```");
                 }
 
                 fs.writeFile("botUsers.json", JSON.stringify(users, null, 4), err => {
