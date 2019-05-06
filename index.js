@@ -63,6 +63,7 @@ bot.on('message', message => {
                 } else {
                     message.channel.sendMessage("```"+"no user provided: 'setAdmin <user>'"+"```");
                 }
+                break;
         }
     }
 
