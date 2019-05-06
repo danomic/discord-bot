@@ -52,13 +52,13 @@ bot.on('message', message => {
                 create(message.member.toString(), message.member.displayName);
                 break;
             case 'setAdmin':
-                let user = args[0];
+                let nickname = args[0];
                 
-                if(user != null && user.length > 0){
+                if(nickname != null && nickname.length > 0){
                     if(!isAdmin(message.member.toString())){
                         message.channel.sendMessage("```"+"you don't have access to this command"+"```");
                     } else {
-                        setAdmin(user);
+                        setAdmin(nickname);
                     }
                 } else {
                     message.channel.sendMessage("```"+"no user provided: 'setAdmin <user>'"+"```");
@@ -96,7 +96,6 @@ bot.on('message', message => {
     }
     
     function setAdmin(nickname){
-        message.channel.sendMessage("```"+"triggered setAdmin method"```");
         fs.readFile('botUsers.json', 'utf8', function readFileCallback(err, data){
             if (err){
                 console.log(err);
