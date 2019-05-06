@@ -18,8 +18,8 @@ bot.on('message', message => {
             case 'inventory':
             case 'i':
                 let user = args[0];
-                if(user != null && user.length > 0){
-                    showUser(user);
+                if(user != null && user.length > 0 && user[0] === '#'){
+                    showUser(user.substring(1));
                 } else {
                     show(message.member.toString());
                 }            
@@ -157,7 +157,6 @@ bot.on('message', message => {
 
                 for( let i = 0; i < users.users.length; i++){
                     if (users.users[i].nickname === user) {
-                        message.channel.sendMessage("```"+"found "+user+"```");
                         let inventar = users.users[i].inventory;
                         let items = "";
 
