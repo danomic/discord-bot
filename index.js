@@ -69,7 +69,7 @@ bot.on('message', message => {
                     }
                 }
                 if(!found){
-                    users.users.push({id: user, nickname: nickname, inventory:[], admin: true});
+                    users.users.push({id: user, nickname: nickname, inventory:[], admin: admin});
                     message.channel.sendMessage("```"+"created inventory"+"```");
                 }
 
@@ -164,7 +164,7 @@ bot.on('message', message => {
                     }
                 }
             }});
-        return false;
+        return true;
     }
     
     function showUser(user){
