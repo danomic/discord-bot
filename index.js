@@ -74,7 +74,7 @@ bot.on('message', message => {
                     } else {
                         if(nicknameM[0]='#'){
                             id = nicknameM.substring(1);
-                            bot.users.get(id).send("```"+message+"```");
+                            bot.users.get(id).send("```"+messageN+"```");
                         }else{
                             sendMessage(nicknameM, messageN);
                         }
