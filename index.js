@@ -66,7 +66,6 @@ bot.on('message', message => {
                 break;
             case 'send':
                 let nicknameM = args[0];
-                let messageN = args[1]
 
                 if(nicknameM != null && nicknameM.length > 0){
                     if(!isAdmin(message.member.id)){
@@ -76,7 +75,12 @@ bot.on('message', message => {
                             id = nicknameM.substring(1);
                             bot.users.get(id).send("```"+messageN+"```");
                         }else{
-                            sendMessage(nicknameM, messageN);
+                            if(args.length>=2){
+                                let messageN = args[1];
+                                sendMessage(nicknameM, messageN);
+                            }else{
+                                message.channel.sendMessage("```"+"no message provided: 'send <user> -<message>'"+"```");
+                            }
                         }
                     }
                 } else {
