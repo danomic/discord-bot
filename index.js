@@ -71,16 +71,16 @@ bot.on('message', message => {
                     if(!isAdmin(message.member.id)){
                         message.channel.sendMessage("```"+"you don't have access to this command"+"```");
                     } else {
-                        if(nicknameM[0]='#'){
-                            id = nicknameM.substring(1);
-                            bot.users.get(id).send("```"+messageN+"```");
-                        }else{
-                            if(args.length>=2){
-                                let messageN = args[1];
-                                sendMessage(nicknameM, messageN);
+                        if(args.length>=2){
+                            let messageN = args[1];
+                            if(nicknameM[0]='#'){
+                                id = nicknameM.substring(1);
+                                bot.users.get(id).send("```"+messageN+"```");
                             }else{
-                                message.channel.sendMessage("```"+"no message provided: 'send <user> -<message>'"+"```");
+                                sendMessage(nicknameM, messageN);
                             }
+                        } else {
+                            message.channel.sendMessage("```"+"no message provided: 'send <user> -<message>'"+"```");
                         }
                     }
                 } else {
